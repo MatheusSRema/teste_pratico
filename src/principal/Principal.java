@@ -57,6 +57,8 @@ public class Principal {
 		
 		/** Fim da Parte 3.1 **/
 		
+		// Imprimindo a lista de Funcionários após a insersão de todos
+		System.out.println("\nLista de Funcioários após a inserção de todos:\n");
 		for(Funcionario x : listaDeFuncionarios)
 		{
 			System.out.println(x.getNome());
@@ -70,12 +72,15 @@ public class Principal {
 		
 		/** Fim da Parte 3.2 **/
 		
+		
+		// Imprimindo a lista de Funcionários após a remoção do João
+		System.out.println("\nLista de Funcioários após remoção do João:\n");
 		for(Funcionario x : listaDeFuncionarios)
 		{
 			System.out.println(x.getNome());
 		}
-		
 		System.out.println("---------------------------\n");
+		
 		
 		/** Início da Parte 3.3 **/
 		
@@ -99,15 +104,17 @@ public class Principal {
 		
 		/** Fim da Parte 3.4 **/
 		
+		
+		// Imprimindo a lista de Funcionários após o ajuste 
+		System.out.println("Lista de Funcionário após ajuste salarial:\n");
 		for(Funcionario x : listaDeFuncionarios)
 		{
 			imprimiFuncionarios(x);
 		}
-
 		System.out.println("---------------------------\n");
 		
-		/** Início da Parte 3.5 **/
 		
+		/** Início da Parte 3.5 **/
 
 		Map<String , ArrayList<Funcionario>> semelhancas = new TreeMap<String, ArrayList<Funcionario>>();
 		for ( Funcionario p : listaDeFuncionarios) {
@@ -120,17 +127,17 @@ public class Principal {
 		/** Fim da Parte 3.5 **/
 		
 		/** Início da Parte 3.6 **/
-		System.out.println("Printa Resultado");
+		
+		System.out.println("Funcionários Agrupados por Função:\n");
+		
 		for(String chave : semelhancas.keySet())
 		{
 			System.out.println(chave + ":    " +semelhancas.get(chave));
 		}
-
-		System.out.println("---------------------------\n");
 		
 		/** Fim da Parte 3.6 **/
 		
-		
+		System.out.println("---------------------------\n");
 		
 		/** Início da Parte 3.8 **/
 		ArrayList<Funcionario> aniversariontesDoMes = new ArrayList<>();
@@ -139,28 +146,26 @@ public class Principal {
 		verificaAniversarianteDoMes(listaDeFuncionarios, 12, aniversariontesDoMes);
 		
 		System.out.println("Segue a lista dos Aniversariantes de Outubro e de Dezembro:\n");
+		
 		for(Funcionario x : aniversariontesDoMes)
 		{
 			imprimiFuncionarios(x);
 		}
-		System.out.println("---------------------------\n");
 		/** Fim da Parte 3.8 **/
 		
-		
+		System.out.println("---------------------------\n");
 		
 		/** Início da Parte 3.9 **/
-		Funcionario funcionarioMaisVelho = new Funcionario();
-		funcionarioMaisVelho = encontraMaisVelho(listaDeFuncionarios);
+
+		encontraMaisVelho(listaDeFuncionarios);
 		
-		LocalDate hoje = LocalDate.now();
-		Period idade = Period.between(funcionarioMaisVelho.getDataDeNascimento(), hoje);
-		
-		System.out.println("\n\nO funcionário mais velho: " + funcionarioMaisVelho.getNome() +", têm: "+ idade.getYears() + " anos de idade. \n");
-		
-		System.out.println("---------------------------\n");
 		/** Fim da Parte 3.9 **/
+
+		System.out.println("---------------------------\n");
 		
 		/** Início da Parte 3.10 **/
+		
+		System.out.println("\nLista de Funcionário por ordem Alfabética:\n");
 		
 		imprimiFuncionariosOrdemAlfabetica(listaDeFuncionarios);
 		
@@ -178,9 +183,12 @@ public class Principal {
 		
 		/** Início da Parte 3.12 **/
 		
+		System.out.println("\nLista de Funcionário e seus salário/salário mínimo:\n");
+		
 		imprimiSalarioComBaseNoMinimo(listaDeFuncionarios);
 		
 		/** Fim da Parte 3.12 **/
+		
 		System.out.println("---------------------------\n");
 	}
 	
@@ -218,7 +226,7 @@ public class Principal {
 		
 	}
 	
-	public static Funcionario encontraMaisVelho(ArrayList<Funcionario> listaDeFuncionarios){
+	public static void encontraMaisVelho(ArrayList<Funcionario> listaDeFuncionarios){
 		
 		Funcionario oMaisVelho = new Funcionario();
 		oMaisVelho = listaDeFuncionarios.get(0);
@@ -231,7 +239,11 @@ public class Principal {
 			}
 		}
 		
-		return(oMaisVelho);
+		LocalDate hoje = LocalDate.now();
+		Period idade = Period.between(oMaisVelho.getDataDeNascimento(), hoje);
+		
+		System.out.println("\nO funcionário mais velho: " + oMaisVelho.getNome() +", têm: "+ idade.getYears() + " anos de idade. \n");
+
 	}
 	
 	public static void imprimiFuncionariosOrdemAlfabetica(ArrayList<Funcionario> listaDeFuncionarios) {
@@ -258,7 +270,7 @@ public class Principal {
 			salarioTotal = salarioTotal.add(x.getSalario());
 		}
 		
-		System.out.println("O salário total de todos os funcionários é: R$" +formatoBrasil.format(salarioTotal));
+		System.out.println("\nO salário total de todos os funcionários é: R$" +formatoBrasil.format(salarioTotal) + ".\n");
 	}
 	
 	
@@ -271,7 +283,7 @@ public class Principal {
 		
 		for(Funcionario x : listaDeFuncionarios)
 		{
-			System.out.println("\nO salário de " + x.getNome() + " equivalem a: " +formatoBrasil.format((x.getSalario()).divide(salarioMinimo,3,RoundingMode.UP)) + " salários mínimo.");
+			System.out.println("\nO salário de " + x.getNome() + " equivale a: " +formatoBrasil.format((x.getSalario()).divide(salarioMinimo,3,RoundingMode.UP)) + " salários mínimo.");
 		}
 		
 		
