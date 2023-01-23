@@ -116,23 +116,29 @@ public class Principal {
 		
 		/** Início da Parte 3.5 **/
 
-		Map<String , ArrayList<Funcionario>> semelhancas = new TreeMap<String, ArrayList<Funcionario>>();
-		for ( Funcionario p : listaDeFuncionarios) {
-			ArrayList<Funcionario> semelhantes = semelhancas.get(p.getFuncao());
-			if ( semelhantes == null )
-				semelhancas.put(p.getFuncao(), semelhantes = new ArrayList<Funcionario>());
-		    semelhantes.add(p);
-		}
+		Map<String , ArrayList<String>> agupamentoPorFuncao = new TreeMap<String, ArrayList<String>>();
 		
+		for ( Funcionario x : listaDeFuncionarios) {
+			
+			ArrayList<String> atualizaLista = agupamentoPorFuncao.get(x.getFuncao());
+			
+			if ( atualizaLista == null ) {
+				agupamentoPorFuncao.put(x.getFuncao(), atualizaLista = new ArrayList<String>());
+			}
+			atualizaLista.add(x.getNome());   
+		}
+
 		/** Fim da Parte 3.5 **/
+		
+		System.out.println("---------------------------\n");
 		
 		/** Início da Parte 3.6 **/
 		
 		System.out.println("Funcionários Agrupados por Função:\n");
 		
-		for(String chave : semelhancas.keySet())
+		for(String chave : agupamentoPorFuncao.keySet())
 		{
-			System.out.println(chave + ":    " +semelhancas.get(chave));
+			System.out.println(chave + ":    " +agupamentoPorFuncao.get(chave));
 		}
 		
 		/** Fim da Parte 3.6 **/
