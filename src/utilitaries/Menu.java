@@ -13,7 +13,7 @@ public class Menu {
 					+ "6 - Imprimir os funcionários que fazem aniversário em um determinado mês (Digite 10 e depois da exibição do resultado digite 12, item 3.8)\n"
 					+ "7 - Imprimir o funcionários mais velho (item 3.9)\n"
 					+ "8 - Imprimir os funcionários por ordem alfabética (item 3.10)\n"
-					+ "9 - Imprimir o total  total dos salários dos funcionários (item 3.11)\n"
+					+ "9 - Imprimir o total dos salários dos funcionários (item 3.11)\n"
 					+ "10 - Imprimir os salários dos funcionários em salários mínimos (item 3.12)\n"
 					+ "11 - Sair\n";
 		

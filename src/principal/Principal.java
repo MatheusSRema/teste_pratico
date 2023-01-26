@@ -22,6 +22,7 @@ public class Principal {
 		
 		ArrayList<Funcionario> listaDeFuncionarios = new ArrayList<>();
 		Map<String , ArrayList<String>> agupamentoPorFuncao = new TreeMap<String, ArrayList<String>>();
+		Integer opcao ;
 		
 		/** Início do ítem 3.1 **/
 		
@@ -37,8 +38,6 @@ public class Principal {
 		adicionaFuncionario("Helena", LocalDate.of(1996,9,02), new BigDecimal(2799.93),"Gerente", listaDeFuncionarios);
 		
 		/** Fim do ítem 3.1 **/
-		
-		int opcao = 0;
 		
 		do {
 			
@@ -227,6 +226,8 @@ public class Principal {
 			
 			atualizaLista.add(x.getNome());   
 		}
+		
+		CaixaDeMensagem.mostraMensagem("Os Funcionários foram agrupados por função com sucesso.", "Agrupamento Concluído", 2,40);
 		
 		return (agupamentoPorFuncao);
 	}
