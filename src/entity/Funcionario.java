@@ -1,4 +1,4 @@
-package informacoes.pessoa;
+package entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

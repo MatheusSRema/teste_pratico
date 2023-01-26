@@ -13,25 +13,17 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import informacoes.pessoa.Funcionario;
+import entity.Funcionario;
+import utilitaries.*;
 
 public class Principal {
 
 	public static void main(String[] args) {
 		
-		/** Início da Parte 3.1 **/
-		/*Funcionario fun1 = new Funcionario("Maria", LocalDate.of(2000,10,18), new BigDecimal(2009.44),"Operador");
-		Funcionario fun2 = new Funcionario("João", LocalDate.of(1990,05,12), new BigDecimal(2284.38),"Operador");
-		Funcionario fun3 = new Funcionario("Caio", LocalDate.of(1961,05,02), new BigDecimal(9836.14),"Coordenador");
-		Funcionario fun4 = new Funcionario("Miguel", LocalDate.of(1988,10,14), new BigDecimal(19119.88),"Diretor");
-		Funcionario fun5 = new Funcionario("Alice", LocalDate.of(1995,01,05), new BigDecimal(2234.68),"Recepcionista");
-		Funcionario fun6 = new Funcionario("Heitor", LocalDate.of(1999,11,17), new BigDecimal(1582.72),"Operador");
-		Funcionario fun7 = new Funcionario("Arthur", LocalDate.of(1993,03,31), new BigDecimal(4071.84),"Contador");
-		Funcionario fun8 = new Funcionario("Laura", LocalDate.of(1994,07,8), new BigDecimal(3017.45),"Gerente");
-		Funcionario fun9 = new Funcionario("Heloísa", LocalDate.of(2003,05,24), new BigDecimal(1606.85),"Eletricista");
-		Funcionario fun10 = new Funcionario("Helena", LocalDate.of(1996,9,02),new BigDecimal(2799.93),"Gerente");*/
-		
 		ArrayList<Funcionario> listaDeFuncionarios = new ArrayList<>();
+		Map<String , ArrayList<String>> agupamentoPorFuncao = new TreeMap<String, ArrayList<String>>();
+		
+		/** Início do ítem 3.1 **/
 		
 		adicionaFuncionario("Maria", LocalDate.of(2000,10,18), new BigDecimal(2009.44),"Operador", listaDeFuncionarios);
 		adicionaFuncionario("João", LocalDate.of(1990,05,12), new BigDecimal(2284.38),"Operador", listaDeFuncionarios);
@@ -44,78 +36,185 @@ public class Principal {
 		adicionaFuncionario("Heloísa", LocalDate.of(2003,05,24), new BigDecimal(1606.85),"Eletricista", listaDeFuncionarios);
 		adicionaFuncionario("Helena", LocalDate.of(1996,9,02), new BigDecimal(2799.93),"Gerente", listaDeFuncionarios);
 		
-		/*listaDeFuncionarios.add(fun1);
-		listaDeFuncionarios.add(fun2);
-		listaDeFuncionarios.add(fun3);
-		listaDeFuncionarios.add(fun4);
-		listaDeFuncionarios.add(fun5);
-		listaDeFuncionarios.add(fun6);
-		listaDeFuncionarios.add(fun7);
-		listaDeFuncionarios.add(fun8);
-		listaDeFuncionarios.add(fun9);
-		listaDeFuncionarios.add(fun10);*/
+		/** Fim do ítem 3.1 **/
 		
-		/** Fim da Parte 3.1 **/
+		int opcao = 0;
 		
-		// Imprimindo a lista de Funcionários após a insersão de todos
-		System.out.println("\nLista de Funcioários após a inserção de todos:\n");
-		for(Funcionario x : listaDeFuncionarios)
+		do {
+			
+			opcao = Menu.menuPrincipal();
+			
+			switch (opcao) {
+			
+				case 1:
+					/** Início do ítem 3.2 **/
+					
+					removeFuncionario(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.2 **/
+					break;
+					
+				case 2:
+					
+					/** Início do ítem 3.3 **/
+					
+					imprimiFuncionarios(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.3 **/
+					break;
+					
+				case 3:
+					
+					/** Início do ítem 3.4 **/
+					
+					ajusteSalarial(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.4 **/
+					break;
+					
+				case 4:
+					
+					/** Início do ítem 3.5 **/
+					
+					agupamentoPorFuncao = agrupaPorFuncao(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.5 **/
+					break;
+					
+				case 5:
+					
+					/** Início do ítem 3.6 **/
+					
+					imprimiFuncionariosAgrupados(agupamentoPorFuncao);
+					
+					/** Fim do ítem 3.6 **/
+					break;
+				
+				case 6:
+					
+					/** Início do ítem 3.8 **/
+					
+					verificaAniversarianteDoMes( listaDeFuncionarios);
+					
+					/** Fim do ítem 3.8 **/
+					break;
+						
+				case 7:
+					
+					/** Início do ítem 3.9 **/
+					
+					encontraMaisVelho(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.9 **/
+					break;
+						
+				case 8:
+					
+					/** Início do ítem 3.10 **/
+					
+					imprimiFuncionariosOrdemAlfabetica(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.10 **/
+					break;
+					
+				case 9:
+					
+					/** Início do ítem 3.11 **/
+					
+					imprimiSalarioTotalFuncionarios(listaDeFuncionarios);
+					
+					/** Fim do ítem 3.11 **/
+					break;
+					
+				case 10:
+				
+					/** Início do ítem 3.12 **/
+					
+					imprimiSalarioComBaseNoMinimo(listaDeFuncionarios);
+				
+					/** Fim do ítem 3.12 **/
+					break;				
+					
+				case 11:
+					
+					break;
+	
+				default:
+					
+					CaixaDeMensagem.mostraMensagem("Informe uma opção válida", "Opção Inválida", 123, 80);
+					
+					break;
+			}
+			
+		}while(opcao != 11);
+		
+	}
+	
+	private static void adicionaFuncionario(String nome, LocalDate dataDeNascimento, BigDecimal salario, String funcao, ArrayList<Funcionario> listaDeFuncionarios) {
+		
+		Funcionario fun = new Funcionario(nome, dataDeNascimento, salario, funcao);
+		listaDeFuncionarios.add(fun);
+		
+	}
+	
+	private static void removeFuncionario( ArrayList<Funcionario> listaDeFuncionarios) {
+		
+		Integer op=1;
+		
+		do {
+			
+			String nome = CaixaDeMensagem.leString("Informe o nome do funcionário que deseja remover: ", "João"); 
+			boolean removeu = false;
+			
+			for(int i = 0 ; i < listaDeFuncionarios.size(); i++)
+		    {
+				Funcionario p = listaDeFuncionarios.get(i);
+	
+		        if(p.getNome().equals(nome))
+		        {
+		        	removeu = listaDeFuncionarios.remove(p);  // Tentei usar o listaDeFuncionarios.removeIf(x -> x.getNome() == "João") e não consegui
+	
+		            break;
+		        }
+		    }
+			
+			if(!removeu) {
+				op = CaixaDeMensagem.mostraOpcoes("O nome que você informou não consta na lista de Funcionário.\nDeseja inserir outro nome para a Busca?", 2,35);
+			}
+			else {
+				op = 1;
+			}
+			
+		}while(op==0);
+	}
+	
+	private static void imprimiFuncionarios(ArrayList<Funcionario> listaDeFuncionarios) {
+		
+		String guardaFuncionarios = "";
+		DateTimeFormatter formatadorBarra = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		Locale localBrasil = new Locale("pt","BR");
+		NumberFormat formatoBrasil = NumberFormat.getNumberInstance(localBrasil);
+		
+		for(Funcionario funcionario : listaDeFuncionarios)
 		{
-			System.out.println(x.getNome());
+			guardaFuncionarios +=  "\nNome: "+funcionario.getNome() + ", Data de Nacimento: " + (funcionario.getDataDeNascimento()).format(formatadorBarra) + ", Salário: R$" + formatoBrasil.format(funcionario.getSalario()) + " e Função: " + funcionario.getFuncao() + "." ;
 		}
 		
-		System.out.println("---------------------------\n");
+		CaixaDeMensagem.mostraMensagem(guardaFuncionarios , "Lista de Funcionários", 15, 70);
+	}
+	
+	private static void ajusteSalarial(ArrayList<Funcionario> listaDeFuncionarios) {
 		
-		/** Início da Parte 3.2 **/
+		BigDecimal ajuste = CaixaDeMensagem.leBigDecimal("Informe o valor do reajuste salarial - Digite o ajuste em Decimal, Ex: 0.3 para 30% de aumento", 2,50);
 		
-		listaDeFuncionarios.removeIf(x -> x.getNome() == "João");
-		
-		/** Fim da Parte 3.2 **/
-		
-		
-		// Imprimindo a lista de Funcionários após a remoção do João
-		System.out.println("\nLista de Funcioários após remoção do João:\n");
-		for(Funcionario x : listaDeFuncionarios)
+		for(Funcionario funcionario : listaDeFuncionarios)
 		{
-			System.out.println(x.getNome());
+			funcionario.setSalario(funcionario.getSalario().multiply((new BigDecimal(1.0).add(ajuste))));
 		}
-		System.out.println("---------------------------\n");
+	}
+	
+	private static Map<String , ArrayList<String>> agrupaPorFuncao(ArrayList<Funcionario> listaDeFuncionarios) {
 		
-		
-		/** Início da Parte 3.3 **/
-		
-		System.out.println("\nLista de Funcioários Completa:\n");
-		
-		for(Funcionario x : listaDeFuncionarios)
-		{
-			imprimiFuncionarios(x);
-		}
-		
-		/** Fim da Parte 3.3 **/
-		
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.4 **/
-		
-		for(Funcionario x : listaDeFuncionarios)
-		{
-			ajusteSalarial(x, new BigDecimal(0.1));
-		}
-		
-		/** Fim da Parte 3.4 **/
-		
-		
-		// Imprimindo a lista de Funcionários após o ajuste 
-		System.out.println("Lista de Funcionário após ajuste salarial:\n");
-		for(Funcionario x : listaDeFuncionarios)
-		{
-			imprimiFuncionarios(x);
-		}
-		System.out.println("---------------------------\n");
-		
-		
-		/** Início da Parte 3.5 **/
-
 		Map<String , ArrayList<String>> agupamentoPorFuncao = new TreeMap<String, ArrayList<String>>();
 		
 		for ( Funcionario x : listaDeFuncionarios) {
@@ -125,176 +224,135 @@ public class Principal {
 			if ( atualizaLista == null ) {
 				agupamentoPorFuncao.put(x.getFuncao(), atualizaLista = new ArrayList<String>());
 			}
+			
 			atualizaLista.add(x.getNome());   
 		}
-
-		/** Fim da Parte 3.5 **/
 		
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.6 **/
-		
-		System.out.println("Funcionários Agrupados por Função:\n");
-		
-		for(String chave : agupamentoPorFuncao.keySet())
-		{
-			System.out.println(chave + ":    " +agupamentoPorFuncao.get(chave));
-		}
-		
-		/** Fim da Parte 3.6 **/
-		
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.8 **/
-		ArrayList<Funcionario> aniversariontesDoMes = new ArrayList<>();
-		
-		verificaAniversarianteDoMes(listaDeFuncionarios, 10, aniversariontesDoMes);
-		verificaAniversarianteDoMes(listaDeFuncionarios, 12, aniversariontesDoMes);
-		
-		System.out.println("Segue a lista dos Aniversariantes de Outubro e de Dezembro:\n");
-		
-		for(Funcionario x : aniversariontesDoMes)
-		{
-			imprimiFuncionarios(x);
-		}
-		/** Fim da Parte 3.8 **/
-		
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.9 **/
-
-		encontraMaisVelho(listaDeFuncionarios);
-		
-		/** Fim da Parte 3.9 **/
-
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.10 **/
-		
-		System.out.println("\nLista de Funcionário por ordem Alfabética:\n");
-		
-		imprimiFuncionariosOrdemAlfabetica(listaDeFuncionarios);
-		
-		/** Fim da Parte 3.10 **/
-		
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.11 **/
-		
-		imprimiSalarioTotalFuncionarios(listaDeFuncionarios);
-		
-		/** Fim da Parte 3.11 **/
-		
-		System.out.println("---------------------------\n");
-		
-		/** Início da Parte 3.12 **/
-		
-		System.out.println("\nLista de Funcionário e seus salário/salário mínimo:\n");
-		
-		imprimiSalarioComBaseNoMinimo(listaDeFuncionarios);
-		
-		/** Fim da Parte 3.12 **/
-		
-		System.out.println("---------------------------\n");
+		return (agupamentoPorFuncao);
 	}
 	
-	public static void adicionaFuncionario(String nome, LocalDate dataDeNascimento, BigDecimal salario, String funcao, ArrayList<Funcionario> listaDeFuncionarios) {
+	private static void imprimiFuncionariosAgrupados(Map<String , ArrayList<String>> listaDeFuncionariosAgrupados) {
 		
-		Funcionario fun = new Funcionario(nome, dataDeNascimento, salario, funcao);
-		listaDeFuncionarios.add(fun);
-		
-	}
-	
-	public static void imprimiFuncionarios(Funcionario funcionario) {
-		
-		DateTimeFormatter formatadorBarra = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
-		Locale localBrasil = new Locale("pt","BR");
-		NumberFormat formatoBrasil = NumberFormat.getNumberInstance(localBrasil);
-		
-		System.out.println("\nNome: "+funcionario.getNome() + ", Data de Nacimento: " + (funcionario.getDataDeNascimento()).format(formatadorBarra) + ", Salário: R$" + formatoBrasil.format(funcionario.getSalario()) + " e Função: " + funcionario.getFuncao() + ".");
-	}
-	
-	public static void ajusteSalarial(Funcionario funcionario, BigDecimal ajuste) {
-		funcionario.setSalario(funcionario.getSalario().multiply((new BigDecimal(1.0).add(ajuste))));
-	}
-	
-	public static void verificaAniversarianteDoMes(ArrayList<Funcionario> listaDeFuncionarios, Integer mes, ArrayList<Funcionario> listaDeAniversariantes) {
-		
-		for(Funcionario x : listaDeFuncionarios)
-		{
+		if(!listaDeFuncionariosAgrupados.isEmpty()){
 			
-			if(((x.getDataDeNascimento()).getMonthValue()) == mes)
+			String guardaFuncionariosAgrupados = "";
+			
+			for(String chave : listaDeFuncionariosAgrupados.keySet())
 			{
-				listaDeAniversariantes.add(x);
+				guardaFuncionariosAgrupados +=  chave + "	:	" + listaDeFuncionariosAgrupados.get(chave) + "\n" ;
+				
 			}
+			
+			CaixaDeMensagem.mostraMensagem(guardaFuncionariosAgrupados , "Funcionários Agrupados por Função", 10,35);
+			
+			listaDeFuncionariosAgrupados.clear();
 		}
+		else {
+			CaixaDeMensagem.mostraMensagem("Você ainda não agrupou os funcionários, agrupe-os antes de imprimi-los.", "Precisa agrupar", 2,40);
+		}
+	}
+	
+	private static void verificaAniversarianteDoMes(ArrayList<Funcionario> listaDeFuncionarios) {
+		
+		Integer op=1;
+		
+		do {
+			
+			Integer mes = CaixaDeMensagem.leInteiro("Inserir o número do mês que deseja buscar(1 para Janeiro , 2 para Fevereiro ...)", 2,40);
+			boolean removeu = false;
+			
+			if(removeu = mes >= 1 && mes<=12) {
+				
+				String guardaAniversariantes = "";
+				LocalDate aux = LocalDate.of(2000,mes,1);
+				
+				for(Funcionario funcionario : listaDeFuncionarios)
+				{
+					if(((funcionario.getDataDeNascimento()).getMonthValue()) == mes)
+					{				
+						guardaAniversariantes +=  funcionario.getNome() + "\n";
+					}
+				} 
+				
+				CaixaDeMensagem.mostraMensagem(guardaAniversariantes , "Funcionários Aniversariantes do mês de "+aux.getMonth().name(),5,30);
+			}
+			
+			if(!removeu) {
+				op = CaixaDeMensagem.mostraOpcoes("O número do mês que você informou não é válido.\nDeseja inserir outro mês para a Busca?",2,35);
+			}
+			else {
+				op = 1;
+			}
+			
+		}while(op==0);
 		
 	}
 	
-	public static void encontraMaisVelho(ArrayList<Funcionario> listaDeFuncionarios){
+	private static void encontraMaisVelho(ArrayList<Funcionario> listaDeFuncionarios){
 		
 		Funcionario oMaisVelho = new Funcionario();
+		LocalDate hoje = LocalDate.now();
 		oMaisVelho = listaDeFuncionarios.get(0);
-		for(Funcionario x : listaDeFuncionarios)
+		
+		for(Funcionario funcionario : listaDeFuncionarios)
 		{
 			
-			if((x.getDataDeNascimento()).isBefore(oMaisVelho.getDataDeNascimento()))
+			if((funcionario.getDataDeNascimento()).isBefore(oMaisVelho.getDataDeNascimento()))
 			{
-				oMaisVelho = x;
+				oMaisVelho = funcionario;
 			}
 		}
 		
-		LocalDate hoje = LocalDate.now();
 		Period idade = Period.between(oMaisVelho.getDataDeNascimento(), hoje);
 		
-		System.out.println("\nO funcionário mais velho: " + oMaisVelho.getNome() +", têm: "+ idade.getYears() + " anos de idade. \n");
+		CaixaDeMensagem.mostraMensagem( "Nome: " + oMaisVelho.getNome() +"\nIdade: "+ idade.getYears() + " anos. \n", "Funcionário mais velho", 5,30);
 
 	}
 	
-	public static void imprimiFuncionariosOrdemAlfabetica(ArrayList<Funcionario> listaDeFuncionarios) {
+	private static void imprimiFuncionariosOrdemAlfabetica(ArrayList<Funcionario> listaDeFuncionarios) {
 		
+		String guardaFuncionarios = "";
 		ArrayList<Funcionario> listaDeFuncionariosOrdenada = new ArrayList<>(listaDeFuncionarios);
 		
 		Collections.sort(listaDeFuncionariosOrdenada, Comparator.comparing(Funcionario::getNome));
 		
-		for(Funcionario x : listaDeFuncionariosOrdenada)
+		for(Funcionario funcionarios : listaDeFuncionariosOrdenada)
 		{
-			imprimiFuncionarios(x);
+			guardaFuncionarios += funcionarios.getNome() + "\n";
 		}
+		
+		CaixaDeMensagem.mostraMensagem(guardaFuncionarios , "Nome dos funcionário por ordem alfabética", 11,35);
+		
 	}
 	
-	public static void imprimiSalarioTotalFuncionarios(ArrayList<Funcionario> listaDeFuncionarios) {
+	private static void imprimiSalarioTotalFuncionarios(ArrayList<Funcionario> listaDeFuncionarios) {
 		
 		BigDecimal salarioTotal = new BigDecimal(0.0);
-		
 		Locale localBrasil = new Locale("pt","BR");
 		NumberFormat formatoBrasil = NumberFormat.getNumberInstance(localBrasil);
 		
-		for(Funcionario x : listaDeFuncionarios)
+		for(Funcionario funcionario : listaDeFuncionarios)
 		{
-			salarioTotal = salarioTotal.add(x.getSalario());
+			salarioTotal = salarioTotal.add(funcionario.getSalario());
 		}
 		
-		System.out.println("\nO salário total de todos os funcionários é: R$" +formatoBrasil.format(salarioTotal) + ".\n");
+		CaixaDeMensagem.mostraMensagem("R$"+formatoBrasil.format(salarioTotal) , "Salário total de todos os funcionários", 2,35);
 	}
 	
 	
-	public static void imprimiSalarioComBaseNoMinimo(ArrayList<Funcionario> listaDeFuncionarios) {
+	private static void imprimiSalarioComBaseNoMinimo(ArrayList<Funcionario> listaDeFuncionarios) {
 		
+		String guardaFuncionarios = "";
 		BigDecimal salarioMinimo = new BigDecimal(1212.00);
-		
 		Locale localBrasil = new Locale("pt","BR");
 		NumberFormat formatoBrasil = NumberFormat.getNumberInstance(localBrasil);
 		
-		for(Funcionario x : listaDeFuncionarios)
+		for(Funcionario funcionario : listaDeFuncionarios)
 		{
-			System.out.println("\nO salário de " + x.getNome() + " equivale a: " +formatoBrasil.format((x.getSalario()).divide(salarioMinimo,3,RoundingMode.UP)) + " salários mínimo.");
+			guardaFuncionarios += "O salário de " + funcionario.getNome() + " equivale a: " + formatoBrasil.format((funcionario.getSalario()).divide(salarioMinimo,3,RoundingMode.UP)) + " salários mínimos.\n";
 		}
 		
-		
+		CaixaDeMensagem.mostraMensagem(guardaFuncionarios , "Salário dos funcionários em salários mínimos", 11,35);
 	}
 	
 }
-
-
